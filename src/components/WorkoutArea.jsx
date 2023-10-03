@@ -26,7 +26,10 @@ export default function WorkoutArea(props){
         workouts = data.map((workout)=>
             <Workout name={workout.title}
                     reps={workout.reps}
-                    load={workout.load} />
+                    load={workout.load}
+                    token={props.token}
+                    baseURI={props.baseURI}
+                    id={workout._id} />
             )
             console.log(workouts)
         }

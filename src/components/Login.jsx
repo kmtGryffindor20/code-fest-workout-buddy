@@ -109,13 +109,13 @@ export default function Login(props){
                         onChange={handleChangeInForm} />
                 </div>
                 {formData.isSignUp && <div className="flex flex-col mt-6 mb-6">
-                    <label htmlFor="password" className="text-md font-medium leading-6 text-amber">Confirm Password</label>
+                    <label htmlFor="passwordConfirm" className="text-md font-medium leading-6 text-amber">Confirm Password</label>
                     <input 
                         type="password"
                         name="passwordConfirm"
                         placeholder="Retype Password"
                         className="w-full shadow-sm rounded-md leading-6 indent-2 border-2"
-                        value={formData.password}
+                        value={formData.passwordConfirm}
                         onChange={handleChangeInForm} />
                 </div>}
                 <button className="btn">Sign In</button>
