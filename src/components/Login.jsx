@@ -31,14 +31,23 @@ export default function Login(props){
                     }
                     const response = await fetch(`${props.baseURI}/user/login`, options)
                     const data = await response.json();
-                    props.setToken(data.token)
-                    if(data.token != "")
+                    if(response.status != 200)
                     {
-                        props.setLoginStatus(true);
+                        alert("Incorrect Email or Password!")
+                        props.setLoginStatus(false);
+                        setFormData(prevState => {
+                            return {
+                                ...prevState,
+                                shouldLogin: false
+                            }
+                        })
+                        return;
                     }
                     else{
-                        props.setLoginStatus(false);
+                        props.setLoginStatus(true);
                     }
+                    props.setToken(data.token)
+                    
 
                     console.log(data)
                     setFormData(prevData => {
@@ -53,41 +62,55 @@ export default function Login(props){
             }
             else
             {
-                console.log("signup");
-                async function initiateSignup(){
-                    const options = {
-                        "method":"POST",
-                        "headers":{
-                                "accept": "application/json",
-                                "Content-Type": "application/json"
-                        },
-                        
-                        "body":JSON.stringify({
-                            "email": formData.email,
-                            "password": formData.password
-                        })
-                    }
-                    const response = await fetch(`${props.baseURI}/user/signup`, options)
-                    const data = await response.json();
-                    props.setToken(data.token)
-                    if(data.token != "")
-                    {
-                        props.setLoginStatus(true);
-                    }
-                    else{
-                        props.setLoginStatus(false);
-                    }
-
-                    console.log(data)
-                    setFormData(prevData => {
-                        return {
-                            ...prevData,
-                            shouldLogin: false
+                console.log(formData);
+                if(formData.password === formData.passwordConfirm)
+                {    
+                    async function initiateSignup(){
+                        const options = {
+                            "method":"POST",
+                            "headers":{
+                                    "accept": "application/json",
+                                    "Content-Type": "application/json"
+                            },
+                            
+                            "body":JSON.stringify({
+                                "email": formData.email,
+                                "password": formData.password
+                            })
                         }
-                    })
-                    
+                        const response = await fetch(`${props.baseURI}/user/signup`, options)
+                        const data = await response.json();
+                        props.setToken(data.token)
+                        if(data.token != "")
+                        {
+                            props.setLoginStatus(true);
+                        }
+                        else{
+                            props.setLoginStatus(false);
+                        }
+
+                        console.log(data)
+                        setFormData(prevData => {
+                            return {
+                                ...prevData,
+                                shouldLogin: false
+                            }
+                        })
+                        
+                    }
+                    initiateSignup();
                 }
-                initiateSignup();
+                else{
+                    alert("Passwords do not match.")
+                    props.setLoginStatus(false);
+                        setFormData(prevState => {
+                            return {
+                                ...prevState,
+                                shouldLogin: false
+                            }
+                        })
+                        return;
+                }
             }
         }
         
@@ -127,9 +150,9 @@ export default function Login(props){
 
     return (
         <div id="login" className="flex flex-col items-center bg-night py-24">
-            <h2 className="text-white text-6xl text-center font-bold max-w-4xl">{formData.isSignUp?"Signup Now":"Login to start creating you own fitness routine"}!</h2>
+            <h2 className="text-white text-6xl text-center font-bold max-w-4xl">{formData.isSignUp?"Signup Now to start you fitness routine":"Login to continue your fitness routine"}!</h2>
             <form onSubmit={handleSubmit} className="rounded-lg bg-gunmetal w-96 h-full py-12 px-6 mt-10 shadow-md shadow-seasalt">
-            <h2 className="text-3xl text-white font-bold">Sign in to get your workouts.</h2>
+            <h2 className="text-3xl text-white font-bold">{formData.isSignUp ?"Sign Up to start you workout journey" :"Sign in to get your workouts"}.</h2>
 
                 <div className="flex flex-col mt-6">
                     <label htmlFor="email" className="text-md font-medium leading-6 text-amber">Email</label>
@@ -161,8 +184,8 @@ export default function Login(props){
                         value={formData.passwordConfirm}
                         onChange={handleChangeInForm} />
                 </div>}
-                <button className="btn">Sign In</button>
-                <small className="text-white ml-5">Don't have an account? <a onClick={changeLoginMode} className="hover:text-amber cursor-pointer">Sign Up</a></small>
+                <button className="btn">{formData.isSignUp?"Sign Up":"Log In"}</button>
+                <small className="text-white ml-5">{formData.isSignUp?"Already":"Don't"} have an account? <a onClick={changeLoginMode} className="hover:text-amber cursor-pointer">{formData.isSignUp?"Login":"SignUp"}</a></small>
             </form>
        </div>
     )

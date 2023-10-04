@@ -50,7 +50,7 @@ export default function WorkoutArea(props){
     
 
     return(
-        <div className=" text-white py-10 w-full px-32">
+        <div id="workoutArea" className=" text-white py-10 w-full px-32 min-h-screen">
             <div className="flex items-center mb-6">
                 <h5 className="indent-4 font-bold text-xl md:text-3xl">Your Workouts</h5>
                 <a onClick={handleModal} className="ml-5 items-center hover:animate-pulse cursor-pointer"><img className="h-10 w-10" src="/images/plus.png" alt="" /></a> 

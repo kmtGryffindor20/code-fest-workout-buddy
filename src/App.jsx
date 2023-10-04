@@ -12,7 +12,7 @@ function App() {
 
   return(
     <>
-      <Navbar/>
+      <Navbar hasLoggedIn={hasLoggedIn} />
       <Home hasLoggedIn={hasLoggedIn}/>
       {!hasLoggedIn &&
       <Login 
