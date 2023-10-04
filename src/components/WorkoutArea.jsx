@@ -3,6 +3,7 @@ import { useState, useEffect } from "react"
 export default function WorkoutArea(props){
 
     const [data, setData] = useState([])
+    const [shouldReload, setReload] = useState(false)
     var workouts;
     useEffect(()=> {
         async function getData(){
@@ -20,7 +21,7 @@ export default function WorkoutArea(props){
         getData();
         console.log(data);
         
-    }, [data.length])
+    }, [data.length, shouldReload])
 
     try{
         workouts = data.map((workout)=>
@@ -29,7 +30,8 @@ export default function WorkoutArea(props){
                     load={workout.load}
                     token={props.token}
                     baseURI={props.baseURI}
-                    id={workout._id} />
+                    id={workout._id} 
+                    setReload={setReload}/>
             )
             console.log(workouts)
         }

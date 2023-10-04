@@ -13,44 +13,87 @@ export default function Login(props){
     useEffect(()=> {
         if(formData.shouldLogin)
         {
-            console.log("login");
-            async function getData(){
-                const options = {
-                    "method":"POST",
-                    "headers":{
-                            "accept": "application/json",
-                            "Content-Type": "application/json"
-                    },
-                    
-                    "body":JSON.stringify({
-                        "email": formData.email,
-                        "password": formData.password
-                    })
-                }
-                const response = await fetch(`${props.baseURI}/user/login`, options)
-                const data = await response.json();
-                props.setToken(data.token)
-                if(data.token != "")
-                {
-                    props.setLoginStatus(true);
-                }
-                else{
-                    props.setLoginStatus(false);
-                }
-
-                console.log(data)
-                setFormData(prevData => {
-                    return {
-                        ...prevData,
-                        shouldLogin: false
+            if(!formData.isSignUp)
+            {
+                console.log("login");
+                async function initiateLogin(){
+                    const options = {
+                        "method":"POST",
+                        "headers":{
+                                "accept": "application/json",
+                                "Content-Type": "application/json"
+                        },
+                        
+                        "body":JSON.stringify({
+                            "email": formData.email,
+                            "password": formData.password
+                        })
                     }
-                })
-                
+                    const response = await fetch(`${props.baseURI}/user/login`, options)
+                    const data = await response.json();
+                    props.setToken(data.token)
+                    if(data.token != "")
+                    {
+                        props.setLoginStatus(true);
+                    }
+                    else{
+                        props.setLoginStatus(false);
+                    }
+
+                    console.log(data)
+                    setFormData(prevData => {
+                        return {
+                            ...prevData,
+                            shouldLogin: false
+                        }
+                    })
+                    
+                }
+                initiateLogin();
             }
-            getData();
+            else
+            {
+                console.log("signup");
+                async function initiateSignup(){
+                    const options = {
+                        "method":"POST",
+                        "headers":{
+                                "accept": "application/json",
+                                "Content-Type": "application/json"
+                        },
+                        
+                        "body":JSON.stringify({
+                            "email": formData.email,
+                            "password": formData.password
+                        })
+                    }
+                    const response = await fetch(`${props.baseURI}/user/signup`, options)
+                    const data = await response.json();
+                    props.setToken(data.token)
+                    if(data.token != "")
+                    {
+                        props.setLoginStatus(true);
+                    }
+                    else{
+                        props.setLoginStatus(false);
+                    }
+
+                    console.log(data)
+                    setFormData(prevData => {
+                        return {
+                            ...prevData,
+                            shouldLogin: false
+                        }
+                    })
+                    
+                }
+                initiateSignup();
+            }
         }
         
     }, [formData.shouldLogin])
+
+
 
     function handleChangeInForm(event){
         const {name ,value} = event.target

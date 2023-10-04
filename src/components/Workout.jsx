@@ -7,27 +7,8 @@ export default function Workout(props){
         setOpen(prevState => !prevState)
     }
 
-    const [data, setData] = useState({})
 
-    useEffect(() => {
-        if(isOpen){
-            async function getData(){
-                const options = {
-                    "method":"GET",
-                    "headers":{
-                        "accept": "application/json",
-                        "Authorization": `Bearer ${props.token}`
-                    }
-                }
-                const response = await fetch(`${props.baseURI}/workouts/${props.id}`, options)
-                const this_data = await response.json()
-                
-                setData(this_data);
-            }
-            getData()
-        }
-        
-    }, [isOpen])
+    
     
     return(
     <>
@@ -36,7 +17,7 @@ export default function Workout(props){
             <p>Reps : {props.reps}</p>
             <p>Load : {props.load}</p>
         </div>
-        {isOpen && <Modal showModel={isOpen} setShowModal={setOpen} token={props.token} baseURI={props.baseURI} data={data}/>}
+        {isOpen && <Modal showModel={isOpen} setShowModal={setOpen} token={props.token} baseURI={props.baseURI} id={props.id} setReload={props.setReload}/>}
     </>
 
     )
