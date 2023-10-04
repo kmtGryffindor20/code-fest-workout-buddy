@@ -44,6 +44,7 @@ export default function Login(props){
                         return;
                     }
                     else{
+                        alert("Logged In Successfully!")
                         props.setLoginStatus(true);
                     }
                     props.setToken(data.token)
@@ -81,19 +82,17 @@ export default function Login(props){
                         const response = await fetch(`${props.baseURI}/user/signup`, options)
                         const data = await response.json();
                         props.setToken(data.token)
-                        if(data.token != "")
-                        {
-                            props.setLoginStatus(true);
-                        }
-                        else{
-                            props.setLoginStatus(false);
+                        if (response.status == 200) {
+                            alert("Account Created Successfully!")
+                            
                         }
 
                         console.log(data)
                         setFormData(prevData => {
                             return {
                                 ...prevData,
-                                shouldLogin: false
+                                shouldLogin: false,
+                                isSignUp:false
                             }
                         })
                         

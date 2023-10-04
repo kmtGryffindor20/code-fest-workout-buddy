@@ -78,6 +78,9 @@ export default function Modal(props) {
 
                 props.setReload(prevState => !prevState);
                 setUpdate(prevState => !prevState);
+                if (response.status == 200) {
+                    alert("Workout Updated Successfully!")
+                }
             }
             patchData();
         }
@@ -95,7 +98,7 @@ export default function Modal(props) {
     useEffect(() => {
         if(shouldDelete)
         {
-            async function createWorkout()
+            async function deleteWorkout()
             {
                 const options = {
                     method:"DELETE",
@@ -111,8 +114,11 @@ export default function Modal(props) {
                 console.log(data);
                 setShouldDelete(false);
                 props.setReload(prevState => !prevState);
+                if (response.status == 200) {
+                    alert("Workout Deleted Successfully!")
+                }
             }
-            createWorkout();
+            deleteWorkout();
             props.setShowModal(false);
         }
     }, [shouldDelete])

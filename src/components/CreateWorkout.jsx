@@ -45,6 +45,9 @@ export default function CreateWorkout(props){
                 console.log(data);
                 setShouldCreate(false);
                 props.setReload(prevState => !prevState);
+                if (response.status == 200) {
+                    alert("Workout Created Successfully!")
+                }
             }
             createWorkout()
         }
