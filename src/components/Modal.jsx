@@ -43,6 +43,18 @@ export default function Modal(props) {
         })
     }
 
+    var updatedOn
+    try{
+        updatedOn = data.updatedAt.split("T")[0]
+    }
+    catch {
+        try{
+            updatedOn = data.updatedAt
+        }
+        catch{
+            updatedOn = data.createdAt
+        }
+    }
 
 
     useEffect(()=>
@@ -77,19 +89,46 @@ export default function Modal(props) {
         setUpdate(prevState => !prevState);
     }
 
+    const [shouldDelete, setShouldDelete] = useState(false)
+
+
+    useEffect(() => {
+        if(shouldDelete)
+        {
+            async function createWorkout()
+            {
+                const options = {
+                    method:"DELETE",
+                    headers:{
+                        "accept": "application/json",
+                        "Authorization": `Bearer ${props.token}`,
+                    }
+                }
+
+                const response = await fetch(`${props.baseURI}/workouts/${props.id}`, options)
+                const data = await response.json()
+                console.log(options)
+                console.log(data);
+                setShouldDelete(false);
+                props.setReload(prevState => !prevState);
+            }
+            createWorkout();
+            props.setShowModal(false);
+        }
+    }, [shouldDelete])
+
   return (
       
         <>
           <div
             className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
             <div className="relative w-auto my-6 mx-auto max-w-3xl">
-              Workout Detail
               <div className="rounded-lg shadow-lg relative flex flex-col w-full bg-gunmetal outline-none focus:outline-none">
                 <div className="flex items-start justify-between p-5 border-b border-solid border-seasalt rounded-t">
                   <h3 className="text-3xl font-semibold">
                   {data.title}
                   </h3>
-                  <small>Last Modified On: {data.updatedAt.split('T')[0]}</small>
+                  <small>Last Modified On: {updatedOn}</small>
                 </div>
                 <div className="relative p-6 flex-auto">
                 <form className="rounded-lg bg-gunmetal w-96 h-full py-12 px-6 mt-10">
@@ -114,17 +153,24 @@ export default function Modal(props) {
                         onChange={handleChangeInForm} />
                 </div>
                 <button
-                    className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                    className="btn"
                     type="submit"
                     onClick={handleSubmit}
                   >
                     Save Changes
                   </button>
+                  <button
+                    className="text-white bg-red-500 hover:text-red-500 border-red-500 btn"
+                    type="button"
+                    onClick={() => setShouldDelete(true)}
+                  >
+                    DELETE
+                  </button>
             </form>
                 </div>
                 <div className="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
                   <button
-                    className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                    className="text-white bg-red-500 hover:text-red-500 border-red-500 btn"
                     type="button"
                     onClick={() => props.setShowModal(false)}
                   >
@@ -135,7 +181,7 @@ export default function Modal(props) {
               </div>
             </div>
           </div>
-          <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+          <div className="opacity-50 fixed inset-0 z-40 bg-black"></div>
     </>
   );
 }

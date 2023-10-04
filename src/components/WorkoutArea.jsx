@@ -1,9 +1,16 @@
 import Workout from "./Workout"
+import CreateWorkout from "./CreateWorkout"
 import { useState, useEffect } from "react"
 export default function WorkoutArea(props){
 
     const [data, setData] = useState([])
     const [shouldReload, setReload] = useState(false)
+
+    const [isOpen, setOpen] = useState(false)
+    function handleModal(){
+        setOpen(true)
+    }
+
     var workouts;
     useEffect(()=> {
         async function getData(){
@@ -44,10 +51,15 @@ export default function WorkoutArea(props){
 
     return(
         <div className=" text-white py-10 w-full px-32">
-            <h5 className="indent-4 font-bold text-xl md:text-3xl mb-6">Your Workouts</h5>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+            <div className="flex items-center mb-6">
+                <h5 className="indent-4 font-bold text-xl md:text-3xl">Your Workouts</h5>
+                <a onClick={handleModal} className="ml-5 items-center hover:animate-pulse cursor-pointer"><img className="h-10 w-10" src="/images/plus.png" alt="" /></a> 
+            </div>
+            {isOpen && <CreateWorkout setOpen={setOpen} baseURI={props.baseURI} token={props.token} setReload={setReload} />}
+            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 lg:gap-10">
                 {workouts}
             </div>
+            
         </div>
     )
 }
