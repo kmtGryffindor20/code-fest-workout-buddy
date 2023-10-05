@@ -128,7 +128,7 @@ export default function Modal(props) {
         <>
           <div
             className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
-            <div className="relative w-auto my-6 mx-auto max-w-3xl">
+            <div className="relative w-auto my-6 mx-auto max-w-3xl top-10">
               <div className="rounded-lg shadow-lg relative flex flex-col w-full bg-gunmetal outline-none focus:outline-none">
                 <div className="flex items-start justify-between p-5 border-b border-solid border-seasalt rounded-t">
                   <h3 className="text-3xl font-semibold">
@@ -137,7 +137,7 @@ export default function Modal(props) {
                   <small>Last Modified On: {updatedOn}</small>
                 </div>
                 <div className="relative p-6 flex-auto">
-                <form className="rounded-lg bg-gunmetal w-96 h-full py-12 px-6 mt-10">
+                <form className="rounded-lg bg-gunmetal w-60 sm:w-72 md:w-96 h-1/2 sm:h-full py-12 px-6 mt-10">
                 <h2 className="text-3xl text-white font-bold">Update Your Workout?</h2>
 
                 <div className="flex flex-col mt-6 mb-6">

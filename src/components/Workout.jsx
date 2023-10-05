@@ -12,7 +12,7 @@ export default function Workout(props){
     
     return(
     <>
-        <div onClick={handleModal} className="w-full max-w-sm p-6 ml-5 bg-gunmetal border border-seasalt rounded-lg shadow hover:bg-gray-800 cursor-pointer">
+        <div onClick={handleModal} className="w-full p-6 ml-0 sm:ml-5 bg-gunmetal border border-seasalt rounded-lg shadow hover:bg-gray-800 cursor-pointer">
             <h3 className="text-xl lg:text:3xl font-bold">{props.name}</h3>
             <p className="font-light md:font-normal lg:font-semibold">Reps : {props.reps}</p>
             <p className="font-light md:font-normal lg:font-semibold">Load : {props.load}</p>

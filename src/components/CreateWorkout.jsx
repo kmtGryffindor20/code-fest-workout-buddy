@@ -61,13 +61,13 @@ export default function CreateWorkout(props){
 
     return(
         <>
-            <div className="fixed z-50 overflow-y-auto justify-center items-center flex overflow-x-hidden inset-0 ">
+            <div className="fixed z-50 overflow-y-auto justify-center items-center flex overflow-x-hidden inset-0">
                 <div className="relative w-auto my-6 mx-auto max-w-3xl bg-gunmetal">
-                <div className="rounded-lg shadow-lg relative flex flex-col w-full bg-gunmetal outline-none focus:outline-none">
+                <div className="rounded-lg shadow-lg relative flex flex-col bg-gunmetal outline-none focus:outline-none">
                 <div className="relative p-6 flex-auto">
                 <h2 className="text-3xl text-white font-bold">Create New Workout!</h2>
 
-                <form className="rounded-lg bg-gunmetal w-96 h-full py-12 px-6 mt-10">
+                <form className="rounded-lg bg-gunmetal w-60 sm:w-72 md:w-96 h-1/2 sm:h-full py-12 px-6 mt-10">
                 <div className="flex flex-col mt-6 mb-6">
                     <label htmlFor="title" className="text-md font-medium leading-6 text-amber">Title</label>
                     <input 

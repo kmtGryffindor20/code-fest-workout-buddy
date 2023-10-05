@@ -149,8 +149,8 @@ export default function Login(props){
 
     return (
         <div id="login" className="flex flex-col items-center bg-night py-24">
-            <h2 className="text-white text-6xl text-center font-bold max-w-4xl">{formData.isSignUp?"Signup Now to start you fitness routine":"Login to continue your fitness routine"}!</h2>
-            <form onSubmit={handleSubmit} className="rounded-lg bg-gunmetal w-96 h-full py-12 px-6 mt-10 shadow-md shadow-seasalt">
+            <h2 className="text-white text-6xl md:text-7xl lg:text-8xl text-center font-bold max-w-4xl">{formData.isSignUp?"Signup Now to start you fitness routine":"Login to continue your fitness routine"}!</h2>
+            <form onSubmit={handleSubmit} className="rounded-lg bg-gunmetal w-72 md:w-96 h-full py-12 px-6 mt-10 shadow-md shadow-seasalt">
             <h2 className="text-3xl text-white font-bold">{formData.isSignUp ?"Sign Up to start you workout journey" :"Sign in to get your workouts"}.</h2>
 
                 <div className="flex flex-col mt-6">
