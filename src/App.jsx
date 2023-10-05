@@ -2,6 +2,7 @@ import Login from "./components/Login"
 import Navbar from "./components/Navbar"
 import Home from "./components/Home"
 import WorkoutArea from "./components/WorkoutArea"
+import Footer from "./components/Footer"
 import { useState } from "react"
 
 function App() {
@@ -23,6 +24,8 @@ function App() {
                        token={token}
                        baseURI={baseURI}/>}
 
+      
+      <Footer/>
     </>
   )
 }
