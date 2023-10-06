@@ -1,4 +1,8 @@
+# React + Vite
 
-# Codefest Techteam Assignment Submission (2ndyear)
-1) Please consider uploading a project demonstration video here.
-2) Ensure your project does not rely on hidden environment variables, as Vercel deployment does not expect any.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+
+Currently, two official plugins are available:
+
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
